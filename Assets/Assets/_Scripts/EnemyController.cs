@@ -6,11 +6,15 @@ public class EnemyController : MonoBehaviour
 
     [HideInInspector]
     public bool isDefeated;
+
     public float waitToDestroy;
 
     void Start()
     {
-
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
     }
 
     void Update()
@@ -42,7 +46,7 @@ public class EnemyController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             //anim.SetBool("isDamaged", true);
-            anim.SetTrigger("isTriggered");
+            anim.SetTrigger("defeated"); // isTriggered
 
             FindFirstObjectByType<PlayerController>().Jump();
 

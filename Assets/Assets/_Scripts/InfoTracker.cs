@@ -4,7 +4,7 @@ public class InfoTracker : MonoBehaviour
 {
     public static InfoTracker instance;
 
-    private void Awake()
+    private void Awake() // Instantiate
     {
         if (instance == null)
         {
@@ -20,6 +20,7 @@ public class InfoTracker : MonoBehaviour
                 currentFruit = PlayerPrefs.GetInt("fruit"); // Takes info from the PlayerPrefs "fruit"
             }
         }
+
         else
         {
             Destroy(gameObject); // Destroys in case of duplicating

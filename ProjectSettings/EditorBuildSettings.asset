@@ -17,5 +17,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assets/_Scenes/Third Level.unity
     guid: 50453dbb9e0319740adc0a53b3c4a315
+  - enabled: 1
+    path: Assets/Assets/_Scenes/Victory Scene.unity
+    guid: 117f70f32c8519043b234cd8c0d6282b
+  - enabled: 1
+    path: Assets/Assets/_Scenes/Boss Level 1.unity
+    guid: 21b41621d4ee97045bb02f27d18aa84e
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8964464160630426807}
   - component: {fileID: 4653423134440283425}
   - component: {fileID: 8940304342136366698}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2963720717575297219}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -12.11, y: 6.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 403777163698194522}
   - component: {fileID: 5063086868316738311}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7229614539001212477}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Ground Checkpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -44,7 +44,6 @@ public class PlayerController : MonoBehaviour
                 MoveFunction();
                 AnimationHandling();
                 ChangeSpriteSide();
-
             }
             else
             {
@@ -75,12 +74,14 @@ public class PlayerController : MonoBehaviour
 
                 oneJumpAfterFall = 0;
             }
+
             // Jump from the ground
             if (isGrounded == true)
             {
                 Jump();
                 canDoubleJump = true;
             }
+
             // Double jump from the ground
             else if (canDoubleJump == true)
             {
@@ -150,5 +151,14 @@ public class PlayerController : MonoBehaviour
         {
             activeSpeed = runSpeed;
         }
+    }
+
+    public void BouncePlayer(float bounceAmount) // Allows for bounce pad to work and for double jump on it
+    {
+        rigidBody.velocity = new Vector2(rigidBody.velocity.x, bounceAmount); // closer look
+
+        canDoubleJump = true;
+
+        anim.SetBool("isGrounded", true);
     }
 }

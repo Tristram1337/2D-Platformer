@@ -16,6 +16,12 @@ public class EnemyPatrol : MonoBehaviour
 
     public EnemyController enemyController;
 
+    // New Mechanics for bird
+    public bool shouldChasePlayer;
+    private bool isChasing;
+    public float distanceToChasePlayer;
+    private PlayerController thePlayer;
+
     void Start()
     {
         // Remove parent from patrol points, so they stay at predetermined place
@@ -26,46 +32,93 @@ public class EnemyPatrol : MonoBehaviour
 
         waitCounter = timeAtPoints;
 
+        if (anim == null)
+        {
+            anim = GetComponent<Animator>();
+        }
+
         anim.SetBool("isMoving", true);
+
+        // New mechanics for bird
+
+        if (shouldChasePlayer == true)
+        {
+            thePlayer = FindFirstObjectByType<PlayerController>();
+        }
     }
 
-    void Update()
+    void Update() // This entire part is a shitshow ...
     {
         if (enemyController.isDefeated == false)
         {
-            // Allows for enemy to move towards the points
-            transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, moveSpeed * Time.deltaTime);
-
-            // How close enemy is to the point
-            if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < 0.001f)
+            if (shouldChasePlayer == true) // Applies to enemy thats chasing
             {
-                // Waiting at point
-                waitCounter -= Time.deltaTime;
-                anim.SetBool("isMoving", false);
-
-                if (waitCounter <= 0)
+                if (isChasing == false)
                 {
-                    currentPoint++;
-
-                    // Change point to the other one, also reset if reaching out of array
-                    if (currentPoint >= patrolPoints.Length)
+                    if (Vector3.Distance(transform.position, thePlayer.transform.position) < distanceToChasePlayer)
                     {
-                        currentPoint = 0;
+                        isChasing = true;
                     }
+                }
 
-                    waitCounter = timeAtPoints;
-
-                    anim.SetBool("isMoving", true);
-
-                    // Changing position of sprite based on the side hes walking towards
-                    if (transform.position.x < patrolPoints[currentPoint].position.x)
+                else
+                {
+                    if (Vector3.Distance(transform.position, thePlayer.transform.position) > distanceToChasePlayer)
                     {
-                        transform.localScale = new Vector3(-1f, 1f, 1f);
+                        isChasing = false;
                     }
-                    else
+                }
+            }
+
+            if (shouldChasePlayer == false || (shouldChasePlayer == true && isChasing == false)) // Applies to everyone
+            {
+                // Allows for enemy to move towards the points
+                transform.position = Vector3.MoveTowards(transform.position, patrolPoints[currentPoint].position, moveSpeed * Time.deltaTime);
+
+                // How close enemy is to given point
+                if (Vector3.Distance(transform.position, patrolPoints[currentPoint].position) < .001f)
+                {
+                    waitCounter -= Time.deltaTime;
+
+                    anim.SetBool("isMoving", false);
+
+                    if (waitCounter <= 0)
                     {
-                        transform.localScale = new Vector3(1f, 1f, 1f);
+                        currentPoint++;
+
+                        // Change point to the other one, also reset if reaching out of array
+                        if (currentPoint >= patrolPoints.Length)
+                        {
+                            currentPoint = 0;
+                        }
+
+                        waitCounter = timeAtPoints;
+
+                        anim.SetBool("isMoving", true);
+
+                        // Changing position of sprite based on the side hes walking towards
+                        if (transform.position.x < patrolPoints[currentPoint].position.x)
+                        {
+                            transform.localScale = new Vector3(-1f, 1f, 1f);
+                        }
+                        else
+                        {
+                            transform.localScale = Vector3.one; // new Vector3(1f, 1f, 1f);
+                        }
                     }
+                }
+            }
+            else if (isChasing == true)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, thePlayer.transform.position, moveSpeed * Time.deltaTime);
+
+                if (transform.position.x > thePlayer.transform.position.x)
+                {
+                    transform.localScale = Vector3.one;
+                }
+                else
+                {
+                    transform.localScale = new Vector3(-1f, 1f, 1f);
                 }
             }
         }

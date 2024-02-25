@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         {
             SetupAudioManager();
         }
+
         // Deletes in case of bug
         else if (instance != this)
         {
@@ -25,6 +26,7 @@ public class AudioManager : MonoBehaviour
     public void SetupAudioManager()
     {
         instance = this;
+
         // Takes care of memory allocation, basically keeps this throughout the scenes
         DontDestroyOnLoad(gameObject);
     }
@@ -40,6 +42,7 @@ public class AudioManager : MonoBehaviour
             track.Stop();
         }
     }
+
     public void PlayMenuMusic()
     {
         StopMusic();

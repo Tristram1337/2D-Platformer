@@ -3,7 +3,7 @@ using UnityEngine;
 public class ParallaxBackground : MonoBehaviour
 {
     public static ParallaxBackground instance;
-    private void Awake()
+    private void Awake() // Instantiate
     {
         instance = this;
     }
@@ -13,7 +13,6 @@ public class ParallaxBackground : MonoBehaviour
 
     [Range(0f, 1f)]
     public float parallaxSpeed;
-
 
     void Start() // Attempt to get rid of start glitch, doesnt work now - camera is fucked for a split second
     {

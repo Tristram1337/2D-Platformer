@@ -24,6 +24,7 @@ public class CheckpointManager : MonoBehaviour
 
     void Update()
     {
+
 #if UNITY_EDITOR    // Debug function, deactivating all checkpoints *after compiling, doesnt work anymore
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -31,6 +32,7 @@ public class CheckpointManager : MonoBehaviour
         }
     }
 #endif
+
     public void DeactivateAllCheckpoints() // Deactivate all checkpoints
     {
         foreach (Checkpoint cp in allCheckpoints)
@@ -38,6 +40,7 @@ public class CheckpointManager : MonoBehaviour
             cp.DeactivateCheckpoint();
         }
     }
+
     public void SetActiveCheckpoint(Checkpoint lastActiveCheckpoint) // Last active checkpoint
     {
         DeactivateAllCheckpoints();

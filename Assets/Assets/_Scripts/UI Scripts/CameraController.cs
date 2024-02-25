@@ -25,8 +25,8 @@ public class CameraController : MonoBehaviour
         // Size of camera
         halfHeight = theCamera.orthographicSize;
         halfWidth = theCamera.orthographicSize * theCamera.aspect;
-        Debug.Log("Camera Orthographic Size Height: " + halfHeight);
-        Debug.Log("Camera Orthographic Size Width: " + halfWidth);
+        //Debug.Log("Camera Orthographic Size Height: " + halfHeight);
+        //Debug.Log("Camera Orthographic Size Width: " + halfWidth);
     }
 
     void LateUpdate()
@@ -42,6 +42,7 @@ public class CameraController : MonoBehaviour
         if (freezeHorizontal == true)
         {
             transform.position = new Vector3(positionStore.x, transform.position.y, transform.position.z);
+
         }
 
         Debug.Log("Camera Position Before Clamping: " + transform.position);
@@ -50,9 +51,9 @@ public class CameraController : MonoBehaviour
         if (clampPosition == true)
         {
             transform.position = new Vector3(
-                    Mathf.Clamp(transform.position.x, clampMin.position.x + halfWidth, clampMax.position.x - halfWidth),
-                    Mathf.Clamp(transform.position.y, clampMin.position.y + halfHeight, clampMax.position.y - halfHeight),
-                    transform.position.z);
+                Mathf.Clamp(transform.position.x, clampMin.position.x + halfWidth, clampMax.position.x - halfWidth),
+                Mathf.Clamp(transform.position.y, clampMin.position.y + halfHeight, clampMax.position.y - halfHeight),
+                transform.position.z);
         }
 
         // Only if the instance is not null move background
@@ -60,7 +61,6 @@ public class CameraController : MonoBehaviour
         {
             ParallaxBackground.instance.MoveBackground();
         }
-
     }
 
     // Lines that allow for clamping the screen, shows the selected max and min area

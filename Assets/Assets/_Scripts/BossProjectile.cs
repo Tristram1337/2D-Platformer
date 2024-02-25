@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossProjectile : MonoBehaviour
@@ -19,7 +17,7 @@ public class BossProjectile : MonoBehaviour
 
     void Update()
     {
-        transform.position += direction * (Time.deltaTime * speed); // parentheses doesnt matter, or do they? wtf
+        transform.position += direction * (Time.deltaTime * speed);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

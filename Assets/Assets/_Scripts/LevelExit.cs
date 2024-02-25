@@ -33,6 +33,7 @@ public class LevelExit : MonoBehaviour
             }
         }
     }
+
     IEnumerator EndLevelCo() // Fade screen
     {
         yield return new WaitForSeconds(waitToEndLevel - fadeTime);
@@ -45,8 +46,11 @@ public class LevelExit : MonoBehaviour
         InfoTracker.instance.SaveInfo(); // Some kind of save function // PlayerPrefs function idk 
 
         SceneManager.LoadScene(nextLevel);
+        if (nextLevel != "Victory Scene")
+        {
+            // PlayerPrefs.SetString("currentLevel", nextLevel); // Uncomment if you want to save the last scene before victory scene into the continue button; meaning after finishing the game
+        }
 
         PlayerPrefs.SetString("currentLevel", nextLevel); // for continue / saved button
-
     }
 }

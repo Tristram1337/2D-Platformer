@@ -21,6 +21,7 @@ public class Checkpoint : MonoBehaviour
             AudioManager.instance.PlaySFX(3);
         }
     }
+
     public void DeactivateCheckpoint() // Deactivation of old checkpoints
     {
         anim.SetBool("flagActive", false);
