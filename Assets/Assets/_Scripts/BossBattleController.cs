@@ -211,13 +211,18 @@ public class BossBattleController : MonoBehaviour
         currentPhase++;
 
         // Starts next phase with harder stats, after hitting boss
-        if (currentPhase < 3)
+        if (currentPhase < 5)
         {
             isWeak = false;
 
-            waitToStartShooting *= .5f;
+            waitToStartShooting *= .4f;
             timeBetweenShots *= .75f;
-            bossMoveSpeed *= 1.5f;
+            bossMoveSpeed *= 1.25f;
+
+            if (bossMoveSpeed >= 10f)
+            {
+                bossMoveSpeed = 10f;
+            }
 
             shootStartCounter = waitToStartShooting;
 
@@ -232,8 +237,6 @@ public class BossBattleController : MonoBehaviour
             currentShot = 0;
 
             AudioManager.instance.PlaySFX(1);
-
-
         }
         else
         {

@@ -20374,7 +20374,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1273003128264699355, guid: 0b46c219f7b596448a85ab73480e417e, type: 3}
       propertyPath: nextLevel
-      value: Second Level
+      value: Level 2
       objectReference: {fileID: 0}
     - target: {fileID: 3898477112266282601, guid: 0b46c219f7b596448a85ab73480e417e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -20690,6 +20690,10 @@ PrefabInstance:
     - target: {fileID: 3775141575479398299, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
       propertyPath: m_fontStyle
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802320970391479524, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4121695261580435570, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
       propertyPath: m_Pivot.x

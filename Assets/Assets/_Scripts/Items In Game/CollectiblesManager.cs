@@ -10,7 +10,7 @@ public class CollectiblesManager : MonoBehaviour
 
     public int collectibleTotalCount;
 
-    public int extraLifeThreshold = 2;
+    public int extraLifeThreshold = 3;
 
     void Start()
     {
@@ -37,7 +37,7 @@ public class CollectiblesManager : MonoBehaviour
                 LifeController.instance.AddLife();
             }
         }
-        UpdateCollectible(collectibleScore);
+        UpdateCollectible(collectibleTotalCount);
     }
 
     public void UpdateCollectible(int collectibleScore)

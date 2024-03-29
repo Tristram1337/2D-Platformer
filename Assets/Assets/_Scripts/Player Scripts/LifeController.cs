@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LifeController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class LifeController : MonoBehaviour
 
     public GameObject deathEffect, respawnEffect;
 
+    private Scene scene;
+
     void Start()
     {
         // Initial spawn point
@@ -25,6 +28,8 @@ public class LifeController : MonoBehaviour
         currentLives = InfoTracker.instance.currentLives; // Transfering info between levels
 
         UpdateDisplay();
+
+        scene = SceneManager.GetActiveScene();
     }
 
     void Update()
@@ -58,6 +63,12 @@ public class LifeController : MonoBehaviour
         Instantiate(deathEffect, thePlayer.transform.position, deathEffect.transform.rotation);
 
         AudioManager.instance.PlaySFX(11);
+
+        if (scene.name == "Boss Level 1")
+        {
+            SceneManager.LoadScene("Boss Level 1");
+            InfoTracker.instance.GetInfo();
+        }
     }
 
     public IEnumerator RespawnCo() // Respawn coroutine, delaying respawn
@@ -70,14 +81,15 @@ public class LifeController : MonoBehaviour
         thePlayer.gameObject.SetActive(true);
 
         Instantiate(respawnEffect, thePlayer.transform.position, Quaternion.identity.normalized);
-
     }
+
     public IEnumerator GameOverCo()
     {
         yield return new WaitForSeconds(respawnDelay);
 
         UIController.instance.ShowGameOver();
     }
+
     public void AddLife()
     {
         currentLives++;

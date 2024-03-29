@@ -6,7 +6,7 @@ public class BossProjectile : MonoBehaviour
 
     private Vector3 direction;
 
-    public float lifetime = 3f;
+    public float lifetime = 5f;
 
     void Start()
     {

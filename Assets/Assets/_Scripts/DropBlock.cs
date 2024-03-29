@@ -22,7 +22,6 @@ public class DropBlock : MonoBehaviour
 
     public Animator anim;
 
-
     void Start()
     {
         player = PlayerHealthController.instance.transform;

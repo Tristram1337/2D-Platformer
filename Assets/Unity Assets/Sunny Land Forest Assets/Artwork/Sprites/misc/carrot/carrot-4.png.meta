@@ -5,7 +5,7 @@ AssetOrigin:
   productId: 108124
   packageName: Sunny Land Forest
   packageVersion: 1.0
-  assetPath: Assets/Sunny Land Forest Assets/Artwork/Sprites/misc/carrot/carrot-4.png
+  assetPath: Assets/Unity Assets/Sunny Land Forest Assets/Artwork/Sprites/misc/carrot/carrot-4.png
   uploadId: 221328
 TextureImporter:
   internalIDToNameTable: []

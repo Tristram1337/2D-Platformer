@@ -9,7 +9,6 @@ public class TutorialManager : MonoBehaviour
     public GameObject doubleJumpGuide;
     public GameObject sprintGuide;
 
-    // Start is called before the first frame update
     void Start()
     {
         allTutorials = FindObjectsByType<Tutorial>(FindObjectsSortMode.None);
@@ -20,7 +19,6 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
 
