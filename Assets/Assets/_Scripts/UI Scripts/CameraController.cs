@@ -45,7 +45,7 @@ public class CameraController : MonoBehaviour
 
         }
 
-        Debug.Log("Camera Position Before Clamping: " + transform.position);
+        //Debug.Log("Camera Position Before Clamping: " + transform.position);
 
         // Clamping, "sticking" camera to a chosen place
         if (clampPosition == true)

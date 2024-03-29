@@ -7,6 +7,7 @@ public class EnemyPatrol : MonoBehaviour
     public Animator anim;
 
     private int currentPoint;
+    private int lastPatrolPoint;
 
     public float moveSpeed;
 
@@ -24,6 +25,7 @@ public class EnemyPatrol : MonoBehaviour
 
     void Start()
     {
+        lastPatrolPoint = 0;
         // Remove parent from patrol points, so they stay at predetermined place
         foreach (Transform t in patrolPoints)
         {
@@ -57,6 +59,7 @@ public class EnemyPatrol : MonoBehaviour
                 {
                     if (Vector3.Distance(transform.position, thePlayer.transform.position) < distanceToChasePlayer)
                     {
+                        lastPatrolPoint = currentPoint;
                         isChasing = true;
                     }
                 }
@@ -66,6 +69,16 @@ public class EnemyPatrol : MonoBehaviour
                     if (Vector3.Distance(transform.position, thePlayer.transform.position) > distanceToChasePlayer)
                     {
                         isChasing = false;
+                    }
+                    // Reset sprites position based on last patrol point, so that sprites always facing correct position
+                    if (transform.position.x < patrolPoints[lastPatrolPoint].position.x)
+                    {
+                        transform.localScale = new Vector3(-1f, 1f, 1f);
+                    }
+
+                    else
+                    {
+                        transform.localScale = Vector3.one;
                     }
                 }
             }

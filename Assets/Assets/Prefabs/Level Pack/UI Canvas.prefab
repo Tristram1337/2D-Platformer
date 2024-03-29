@@ -196,8 +196,8 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_VertexColorAlwaysGammaSpace: 1
+  m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -266,6 +266,7 @@ MonoBehaviour:
   scoreText: {fileID: 3775141575479398299}
   gameOverScreen: {fileID: 5995945791613587487}
   pauseScreen: {fileID: 8074594947005165088}
+  fadeScreenObject: {fileID: 6713026439457489087}
   fadeScreen: {fileID: 615276763713000020}
   fadeSpeed: 2
   fadingToBlack: 0
@@ -2455,7 +2456,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5502063604963104196
 RectTransform:
   m_ObjectHideFlags: 0

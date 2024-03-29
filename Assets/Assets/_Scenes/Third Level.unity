@@ -13944,6 +13944,14 @@ PrefabInstance:
       propertyPath: fadeScreenObject
       value: 
       objectReference: {fileID: 25135721}
+    - target: {fileID: 3802320970391479524, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
+      propertyPath: m_VertexColorAlwaysGammaSpace
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3802320970391479524, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4121695261580435570, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -14033,7 +14041,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8309501553155610674, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f30de36076c10b43bb41dfac244e7c3, type: 3}

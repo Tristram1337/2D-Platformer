@@ -32,6 +32,7 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
+
         FadeFromBlack();
     }
 
@@ -135,7 +136,7 @@ public class UIController : MonoBehaviour
 
     public void FadeFromBlack()
     {
-        //fadeScreenObject.SetActive(true);
+        fadeScreenObject.SetActive(true);
         fadingToBlack = false;
         fadingFromBlack = true;
     }
