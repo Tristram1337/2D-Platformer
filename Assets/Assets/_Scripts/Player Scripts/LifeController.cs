@@ -45,16 +45,22 @@ public class LifeController : MonoBehaviour
 
         currentLives--;
 
+
         // If enough lives, continue respawning
-        if (currentLives > 0)
+        if (currentLives <= 0)
+        {
+            StartCoroutine(GameOverCo());
+        }
+
+        else if (currentLives > 0)
         {
             StartCoroutine(RespawnCo());
-        }
-        else if (currentLives <= 0)
-        {
-            currentLives = 0;
 
-            StartCoroutine(GameOverCo());
+            if (scene.name == "Boss Level 1")
+            {
+                SceneManager.LoadScene("Boss Level 1");
+            }
+            InfoTracker.instance.GetInfo();
         }
 
         UpdateDisplay();
@@ -64,11 +70,6 @@ public class LifeController : MonoBehaviour
 
         AudioManager.instance.PlaySFX(11);
 
-        if (scene.name == "Boss Level 1")
-        {
-            SceneManager.LoadScene("Boss Level 1");
-            InfoTracker.instance.GetInfo();
-        }
     }
 
     public IEnumerator RespawnCo() // Respawn coroutine, delaying respawn
@@ -88,6 +89,8 @@ public class LifeController : MonoBehaviour
         yield return new WaitForSeconds(respawnDelay);
 
         UIController.instance.ShowGameOver();
+        currentLives = 3;
+        InfoTracker.instance.GetInfo();
     }
 
     public void AddLife()

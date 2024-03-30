@@ -61,6 +61,16 @@ public class CameraController : MonoBehaviour
         {
             ParallaxBackground.instance.MoveBackground();
         }
+
+        if (ParallaxSkyAttempt.instance != null)
+        {
+            ParallaxSkyAttempt.instance.MoveBackgroundExtra();
+        }
+
+        if (ParallaxSkyAttempt.instance != null)
+        {
+            ParallaxSkyAttempt.instance.MoveSky();
+        }
     }
 
     // Lines that allow for clamping the screen, shows the selected max and min area

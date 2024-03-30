@@ -9,7 +9,8 @@ public class ParallaxBackground : MonoBehaviour
     }
 
     private Transform theCam;
-    public Transform sky, treeline;
+    public Transform sky;
+    public Transform treeline;
 
     [Range(0f, 1f)]
     public float parallaxSpeed;

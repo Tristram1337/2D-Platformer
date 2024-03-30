@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
     public static UIController instance;
+    public static Tutorial tutorial;
     private void Awake() // Instantiate
     {
         instance = this;
@@ -29,10 +30,10 @@ public class UIController : MonoBehaviour
     public bool fadingFromBlack;
 
     public string mainMenuScene;
+    private readonly string firstLevelScene = "Level 1";
 
     void Start()
     {
-
         FadeFromBlack();
     }
 
@@ -104,7 +105,8 @@ public class UIController : MonoBehaviour
 
     public void Restart() // Restart button
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(firstLevelScene);
         Time.timeScale = 1f;
     }
 
@@ -124,6 +126,7 @@ public class UIController : MonoBehaviour
     {
         if (pauseScreen.activeSelf == false)
         {
+            Tutorial.instance.DeactivateTutorial();
             pauseScreen.SetActive(true);
             Time.timeScale = 0f;
         }

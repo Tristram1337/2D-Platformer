@@ -1,13 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
-    //public static TextGuide instance;
-    //private void Awake() // Instantiate
-    //{
-    //    instance = this;
-    //}
+    public static Tutorial instance;
+    private void Awake() // Instantiate
+    {
+        instance = this;
+    }
     //public GameObject guideScreen;
 
     public TutorialManager tutorial;
@@ -17,12 +16,12 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
+        //string sceneName = SceneManager.GetActiveScene().name;
 
-        if (sceneName == "First Level")
-        {
-            //guideScreen.SetActive(true);
-        }
+        //if (sceneName == "First Level")
+        //{
+        //    //guideScreen.SetActive(true);
+        //}
     }
 
     public void Update()
@@ -30,6 +29,7 @@ public class Tutorial : MonoBehaviour
         if (countdownStarted)
         {
             countdown -= Time.deltaTime;
+
             if (countdown <= 0)
             {
                 ResetCountdown();
@@ -80,6 +80,11 @@ public class Tutorial : MonoBehaviour
         countdownStarted = false;
         countdown = 1.8f;
 
+        DeactivateTutorial();
+    }
+
+    public void DeactivateTutorial()
+    {
         tutorial.movementGuide.SetActive(false);
         tutorial.jumpGuide.SetActive(false);
         tutorial.doubleJumpGuide.SetActive(false);

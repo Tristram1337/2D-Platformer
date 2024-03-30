@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
-    public string firstLevel;
+    private readonly string firstLevel = "Level 1";
     public int startingLives = 3;
     public int startingFruit = 0;
 

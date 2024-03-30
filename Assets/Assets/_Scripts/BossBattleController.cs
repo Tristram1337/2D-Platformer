@@ -211,7 +211,7 @@ public class BossBattleController : MonoBehaviour
         currentPhase++;
 
         // Starts next phase with harder stats, after hitting boss
-        if (currentPhase < 5)
+        if (currentPhase < 4)
         {
             isWeak = false;
 
