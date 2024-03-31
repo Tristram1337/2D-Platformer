@@ -10,7 +10,7 @@ public class CollectiblesManager : MonoBehaviour
 
     public int collectibleTotalCount;
 
-    public int extraLifeThreshold = 3;
+    private readonly int extraLifeThreshold = 5;
 
     void Start()
     {

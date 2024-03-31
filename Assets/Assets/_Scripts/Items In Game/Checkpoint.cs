@@ -14,7 +14,10 @@ public class Checkpoint : MonoBehaviour
         {
             checkpointManager.SetActiveCheckpoint(this);
 
-            anim.SetBool("flagActive", true);
+            if (anim != null)
+            {
+                anim.SetBool("flagActive", true);
+            }
 
             isActive = true;
 
@@ -24,7 +27,11 @@ public class Checkpoint : MonoBehaviour
 
     public void DeactivateCheckpoint() // Deactivation of old checkpoints
     {
-        anim.SetBool("flagActive", false);
+        if (anim != null)
+        {
+            anim.SetBool("flagActive", false);
+        }
+
         isActive = false;
     }
 }

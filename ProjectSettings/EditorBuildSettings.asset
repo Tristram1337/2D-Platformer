@@ -30,7 +30,13 @@ EditorBuildSettings:
     path: Assets/Assets/_Scenes/Level 4.unity
     guid: 89d1a7f3361caf64cb94d30c4af35a5c
   - enabled: 1
-    path: Assets/Assets/_Scenes/Parallax.unity
+    path: Assets/Assets/_Scenes/Level 5.unity
     guid: b9781d1e305427f4b9242026fc044b54
+  - enabled: 1
+    path: Assets/Assets/_Scenes/Secret Level.unity
+    guid: 5310a1bf3ad2dde4e9eef5782eb8876c
+  - enabled: 1
+    path: Assets/Assets/_Scenes/Level 5.unity
+    guid: 5a8d6a264345c2d42922ee285d1fc522
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

@@ -106,6 +106,11 @@ public class UIController : MonoBehaviour
     public void Restart() // Restart button
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        InfoTracker.instance.currentLives = 3;
+        InfoTracker.instance.currentFruit = 0;
+
+        InfoTracker.instance.SaveInfo();
+
         SceneManager.LoadScene(firstLevelScene);
         Time.timeScale = 1f;
     }
