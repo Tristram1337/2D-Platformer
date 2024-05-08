@@ -51,7 +51,7 @@ public class Tutorial : MonoBehaviour
             // Check the name of the collider's GameObject
             string colliderName = collidedObject.name;
 
-            // Activate the corresponding guide based on the name
+            if (tutorial != null)
             switch (colliderName)
             {
                 case "Movement":
@@ -69,6 +69,11 @@ public class Tutorial : MonoBehaviour
                 case "Sprint":
                 tutorial.sprintGuide.SetActive(true);
                 break;
+
+                    case "Secret Level":
+                    if (tutorial.secretLevel != null)
+                        tutorial.secretLevel.SetActive(true);
+                    break;
                 default:
                 break;
             }
