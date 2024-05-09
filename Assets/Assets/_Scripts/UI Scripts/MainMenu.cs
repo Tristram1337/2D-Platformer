@@ -37,6 +37,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void StartGame()
     {
+        StopMusic();
+
         InfoTracker.instance.currentLives = startingLives;
         InfoTracker.instance.currentFruit = startingFruit;
 
@@ -47,6 +49,8 @@ public class MainMenuScript : MonoBehaviour
 
     public void SavedGames() // as stated in savedGamesButton comment
     {
+        StopMusic();
+
         SceneManager.LoadScene(PlayerPrefs.GetString("currentLevel"));
     }
 
@@ -65,5 +69,9 @@ public class MainMenuScript : MonoBehaviour
     public void Informations()
     {
 
+    }
+    private void StopMusic()
+    {
+        AudioManager.instance.StopMusic();
     }
 }

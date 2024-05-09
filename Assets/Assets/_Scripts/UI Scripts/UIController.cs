@@ -131,7 +131,10 @@ public class UIController : MonoBehaviour
     {
         if (pauseScreen.activeSelf == false)
         {
-            Tutorial.instance.DeactivateTutorial();
+            if (Tutorial.instance != null)
+            {
+                Tutorial.instance.DeactivateTutorial();
+            }
             pauseScreen.SetActive(true);
             Time.timeScale = 0f;
         }

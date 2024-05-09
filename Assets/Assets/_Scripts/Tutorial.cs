@@ -48,34 +48,39 @@ public class Tutorial : MonoBehaviour
 
         if (countdownStarted)
         {
-            // Check the name of the collider's GameObject
             string colliderName = collidedObject.name;
 
             if (tutorial != null)
-            switch (colliderName)
             {
-                case "Movement":
-                tutorial.movementGuide.SetActive(true);
-                break;
+                switch (colliderName)
+                {
+                    case "Movement":
+                    if (tutorial.movementGuide != null)
+                        tutorial.movementGuide.SetActive(true);
+                    break;
 
-                case "Jump":
-                tutorial.jumpGuide.SetActive(true);
-                break;
+                    case "Jump":
+                    if (tutorial.jumpGuide != null)
+                        tutorial.jumpGuide.SetActive(true);
+                    break;
 
-                case "Double Jump":
-                tutorial.doubleJumpGuide.SetActive(true);
-                break;
+                    case "Double Jump":
+                    if (tutorial.doubleJumpGuide != null)
+                        tutorial.doubleJumpGuide.SetActive(true);
+                    break;
 
-                case "Sprint":
-                tutorial.sprintGuide.SetActive(true);
-                break;
+                    case "Sprint":
+                    if (tutorial.sprintGuide != null)
+                        tutorial.sprintGuide.SetActive(true);
+                    break;
 
                     case "Secret Level":
                     if (tutorial.secretLevel != null)
                         tutorial.secretLevel.SetActive(true);
                     break;
-                default:
-                break;
+                    default:
+                    break;
+                }
             }
         }
     }
@@ -90,9 +95,18 @@ public class Tutorial : MonoBehaviour
 
     public void DeactivateTutorial()
     {
-        tutorial.movementGuide.SetActive(false);
-        tutorial.jumpGuide.SetActive(false);
-        tutorial.doubleJumpGuide.SetActive(false);
-        tutorial.sprintGuide.SetActive(false);
+        if (tutorial != null)
+        {
+            if (tutorial.movementGuide != null)
+                tutorial.movementGuide.SetActive(false);
+            if (tutorial.jumpGuide != null)
+                tutorial.jumpGuide.SetActive(false);
+            if (tutorial.doubleJumpGuide != null)
+                tutorial.doubleJumpGuide.SetActive(false);
+            if (tutorial.sprintGuide != null)
+                tutorial.sprintGuide.SetActive(false);
+            if (tutorial.secretLevel != null)
+                tutorial.secretLevel.SetActive(false);
+        }
     }
 }

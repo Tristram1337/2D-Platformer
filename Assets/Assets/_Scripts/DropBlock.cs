@@ -91,6 +91,8 @@ public class DropBlock : MonoBehaviour
         raiseCounter = waitToRaise;
 
         anim.SetTrigger("hit");
+
+        AudioManager.instance.PlaySFX(4);
     }
 
     private void OnCollisionEnter2D(Collision2D other) // Damages Player on hit

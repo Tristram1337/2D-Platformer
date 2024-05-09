@@ -23,11 +23,25 @@ public class LevelExit : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 isEnding = true;
-                anim.SetTrigger("ended");
 
-                AudioManager.instance.PlayLevelCompleteMusic();
+                if (anim != null)
+                {
+                    anim.SetTrigger("ended");
+                }
 
-                blockers.SetActive(true); // Block movement after level finishes
+                if (nextLevel == "Victory Scene")
+                {
+                    AudioManager.instance.PlayLevelFinalCompleteMusic();
+                }
+                else
+                {
+                    AudioManager.instance.PlayLevelCompleteMusic();
+                }
+
+                if (blockers != null)
+                {
+                    blockers.SetActive(true); // Block movement after level finishes
+                }
 
                 StartCoroutine(EndLevelCo());
             }
@@ -38,17 +52,24 @@ public class LevelExit : MonoBehaviour
     {
         yield return new WaitForSeconds(waitToEndLevel - fadeTime);
 
-        UIController.instance.FadeToBlack();
+        if (UIController.instance != null)
+        {
+            UIController.instance.FadeToBlack();
+        }
 
         yield return new WaitForSeconds(fadeTime);
 
-        InfoTracker.instance.GetInfo(); // Transfering data from level to level
-        InfoTracker.instance.SaveInfo(); // Some kind of save function // PlayerPrefs function idk 
+        if (InfoTracker.instance != null)
+        {
+            InfoTracker.instance.GetInfo(); // Transfer data from level to level
+            InfoTracker.instance.SaveInfo(); // Save function using PlayerPrefs or similar
+        }
 
         SceneManager.LoadScene(nextLevel);
+
         if (nextLevel != "Victory Scene")
         {
-            // PlayerPrefs.SetString("currentLevel", nextLevel); // Uncomment if you want to save the last scene before victory scene into the continue button; meaning after finishing the game
+            PlayerPrefs.SetString("currentLevel", nextLevel); // Save the last scene before the victory scene for the continue button
         }
 
         PlayerPrefs.SetString("currentLevel", nextLevel); // for continue / saved button
