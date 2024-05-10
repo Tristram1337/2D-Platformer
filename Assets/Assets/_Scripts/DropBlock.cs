@@ -4,9 +4,9 @@ public class DropBlock : MonoBehaviour
 {
     private Transform player;
 
-    public float activationRange = 0.5f;
-
     public float fallSpeed, raiseSpeed;
+    public float maxActivationDistance = 5f;
+    public float xActivationRange = 0.1f;
 
     public Transform dropPoint;
 
@@ -39,11 +39,13 @@ public class DropBlock : MonoBehaviour
         // Check if the block is at its starting position and is not activated
         if (activated == false && transform.position == startPoint)
         {
-            // Check if the player is at the trigger position
-            if (Mathf.Abs(transform.position.x - player.position.x) <= activationRange)
+            // Check if the player is vertically below the block and within the activation range
+            float xDifference = Mathf.Abs(player.position.x - transform.position.x);
+            float yDifference = transform.position.y - player.position.y; // This is positive when the player is below the block
+
+            if (xDifference <= xActivationRange && yDifference > 0 && yDifference <= maxActivationDistance)
             {
                 activated = true;
-
                 anim.SetTrigger("blink");
             }
         }

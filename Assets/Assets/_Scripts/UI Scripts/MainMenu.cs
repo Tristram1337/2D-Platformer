@@ -19,10 +19,10 @@ public class MainMenuScript : MonoBehaviour
         }
     }
 
-    void Update()
-    {
 
 #if UNITY_EDITOR
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.M)) // Just for testing
         {
             AudioManager.instance.PlayLevelCompleteMusic();

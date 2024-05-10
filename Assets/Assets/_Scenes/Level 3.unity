@@ -13459,6 +13459,10 @@ PrefabInstance:
       propertyPath: activationRange
       value: 0.05
       objectReference: {fileID: 0}
+    - target: {fileID: 9184426578117093259, guid: eecba7379f751024fabe397881b457c0, type: 3}
+      propertyPath: maxActivationDistance
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
