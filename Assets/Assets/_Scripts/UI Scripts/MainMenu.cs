@@ -1,19 +1,31 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#nullable enable
+
 public class MainMenuScript : MonoBehaviour
 {
     private readonly string firstLevel = "Level 1";
+    private readonly string credits = "Credits";
+    private readonly string options = "Options";
+    private readonly string mainMenu = "Main Menu";
+
     public int startingLives = 3;
     public int startingFruit = 0;
 
-    public GameObject savedGamesButton; // Possibly only resume / continue button, will see if I can implement saves
+    public GameObject? savedGamesButton; // Possibly only resume / continue button, will see if I can implement saves
 
     void Start()
     {
-        AudioManager.instance.PlayMenuMusic();
+        Scene scene = SceneManager.GetActiveScene();
+        string currentScene = scene.name;
 
-        if (PlayerPrefs.HasKey("currentLevel")) // as stated in savedGamesButton comment
+        if (currentScene != "Credits")
+        {
+            AudioManager.instance.PlayMenuMusic();
+        }
+
+        if (PlayerPrefs.HasKey("currentLevel") && savedGamesButton != null) // as stated in savedGamesButton comment
         {
             savedGamesButton.SetActive(true);
         }
@@ -50,28 +62,42 @@ public class MainMenuScript : MonoBehaviour
     public void SavedGames() // as stated in savedGamesButton comment
     {
         StopMusic();
-
         SceneManager.LoadScene(PlayerPrefs.GetString("currentLevel"));
     }
 
     public void Options()
     {
+        SceneManager.LoadScene(options);
+    }
 
+    public void MainMenu()
+    {
+        StopMusic();
+        SceneManager.LoadScene(mainMenu);
+    }
+
+    public void Credits()
+    {
+        StopMusic();
+        SceneManager.LoadScene(credits);
     }
 
     public void QuitGame()
     {
         Application.Quit();
-
         Debug.Log("Exiting");
     }
 
-    public void Informations()
-    {
-
-    }
     private void StopMusic()
     {
-        AudioManager.instance.StopMusic();
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.StopMusic();
+        }
+        else
+        {
+            Debug.LogError("AudioManager instance is null");
+        }
     }
+
 }

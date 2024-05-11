@@ -32,7 +32,8 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         // Follow Player
-        transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+        float adjustedY = target.position.y + 1; // Adjust the y-coordinate as needed
+        transform.position = new Vector3(target.position.x, adjustedY, transform.position.z);
 
         // Freeze pozition - horizontal or vertical
         if (freezeVertical == true)
