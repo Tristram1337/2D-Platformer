@@ -19,11 +19,6 @@ public class CollectiblesManager : MonoBehaviour
         UpdateCollectible(collectibleTotalCount);
     }
 
-    void Update()
-    {
-
-    }
-
     public void GetCollectible(int collectibleScore) // If reaches set threshold, give player bonus life
     {
         collectibleTotalCount += collectibleScore;

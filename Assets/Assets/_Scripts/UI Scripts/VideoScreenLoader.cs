@@ -10,12 +10,10 @@ public class VideoSceneLoader : MonoBehaviour
     void Start()
     {
         videoPlayer.loopPointReached += LoadScene;
-        AudioManager.instance.PlayCreditsMusic();
     }
 
     void LoadScene(VideoPlayer vp)
     {
         SceneManager.LoadScene(sceneToLoad);
-        AudioManager.instance.StopMusic();
     }
 }

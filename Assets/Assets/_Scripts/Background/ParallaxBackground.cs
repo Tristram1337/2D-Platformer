@@ -15,10 +15,9 @@ public class ParallaxBackground : MonoBehaviour
     [Range(0f, 1f)]
     public float parallaxSpeed;
 
-    void Start() // Attempt to get rid of start glitch, doesnt work now - camera is fucked for a split second
+    void Start() // Attempt to get rid of start glitch
     {
         theCam = Camera.main.transform;
-
         //sky.position = new Vector3(theCam.position.x, theCam.position.y, sky.position.z);
 
         //treeline.position = new Vector3(

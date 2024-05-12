@@ -4,11 +4,6 @@ public class TreelineMover : MonoBehaviour
 {
     public float maxDistance = 22f;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         // Adding new treeline based on movement, not implemented for now

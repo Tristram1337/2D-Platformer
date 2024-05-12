@@ -2,26 +2,15 @@ using UnityEngine;
 
 public class Tutorial : MonoBehaviour
 {
-    public static Tutorial instance;
-    private void Awake() // Instantiate
-    {
-        instance = this;
-    }
-    //public GameObject guideScreen;
-
     public TutorialManager tutorial;
 
     private float countdown = 1.8f;
     private bool countdownStarted = false;
 
-    private void Start()
+    public static Tutorial instance;
+    private void Awake() // Instantiate
     {
-        //string sceneName = SceneManager.GetActiveScene().name;
-
-        //if (sceneName == "First Level")
-        //{
-        //    //guideScreen.SetActive(true);
-        //}
+        instance = this;
     }
 
     public void Update()

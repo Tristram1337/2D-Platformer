@@ -1,53 +1,8 @@
-//using UnityEngine;
-//using UnityEngine.Audio;
-//using UnityEngine.UI;
-
-//public class OptionsManager : MonoBehaviour
-//{
-//    public AudioMixer audioMixer;
-//    public Slider volumeSlider;
-//    public Toggle fullscreenToggle;
-//    public Button applyButton;
-
-//    void Start()
-//    {
-//        // Listeners for UI elements
-//        volumeSlider.onValueChanged.AddListener(SetVolume);
-//        applyButton.onClick.AddListener(SaveSettings);
-
-//        LoadSettings();
-//    }
-
-//    public void SetVolume(float volume)
-//    {
-//        audioMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
-//        SaveSettings();
-//    }
-
-//    public void SetFullscreen(bool isFullscreen)
-//    {
-//        Screen.fullScreen = isFullscreen;
-//        SaveSettings();
-//    }
-
-//    private void LoadSettings()
-//    {
-//        volumeSlider.value = PlayerPrefs.GetFloat("Volume", 0.5f);
-//        fullscreenToggle.isOn = Screen.fullScreen;
-//    }
-
-//    private void SaveSettings()
-//    {
-//        PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-//        PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
-//        PlayerPrefs.Save();
-//    }
-//}
-
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionsManager : MonoBehaviour
@@ -58,8 +13,17 @@ public class OptionsManager : MonoBehaviour
     public Toggle fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
     public Button applyButton;
-
+    bool isFullscreen;
     Resolution[] resolutions;
+
+    private readonly string mainMenu = "Main Menu";
+
+    public static OptionsManager instance;
+
+    private void Awake() // Instantiate
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -70,21 +34,21 @@ public class OptionsManager : MonoBehaviour
 
         List<string> options = new();
 
-        int currentResolutionIndex = 0;
+        int defaultResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
 
-            if (resolutions[i].width == Screen.currentResolution.width &&
-                resolutions[i].height == Screen.currentResolution.height)
+            // If the resolution is 1920x1080, set it as the default resolution
+            if (resolutions[i].width == 1920 && resolutions[i].height == 1080)
             {
-                currentResolutionIndex = i;
+                defaultResolutionIndex = i;
             }
         }
 
         resolutionDropdown.AddOptions(options);
-        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.value = defaultResolutionIndex;
         resolutionDropdown.RefreshShownValue();
 
         // Listeners for UI elements
@@ -106,7 +70,6 @@ public class OptionsManager : MonoBehaviour
             db = -80; // Set volume to -80dB when slider is at 0
 
         audioMixer.SetFloat("Volume", db);
-        SaveSettings();
     }
 
     public void SetSFXVolume(float volume) // New method to set SFX volume
@@ -119,7 +82,6 @@ public class OptionsManager : MonoBehaviour
             db = -80; // Set volume to -80dB when slider is at 0
 
         audioMixer.SetFloat("SFXVolume", db);
-        SaveSettings();
     }
 
     public void SetResolution(int resolutionIndex)
@@ -127,8 +89,7 @@ public class OptionsManager : MonoBehaviour
         if (resolutionIndex >= 0 && resolutionIndex < resolutions.Length)
         {
             Resolution resolution = resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-            SaveSettings();
+            Screen.SetResolution(resolution.width, resolution.height, isFullscreen); // Modify this line
         }
         else
         {
@@ -136,28 +97,43 @@ public class OptionsManager : MonoBehaviour
         }
     }
 
-
     public void SetFullscreen(bool isFullscreen)
     {
-        Screen.fullScreen = isFullscreen;
-        SaveSettings();
+        this.isFullscreen = isFullscreen;
     }
 
-    private void LoadSettings()
+    public void LoadSettings()
     {
-        volumeSlider.value = PlayerPrefs.GetFloat("Volume", 0.5f);
-        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
-        fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", 0) == 1;
-        // Call SetResolution instead of setting the dropdown value directly
-        SetResolution(PlayerPrefs.GetInt("Resolution", 0));
+        volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1f);
+        sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
+        fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
+        SetFullscreen(fullscreenToggle.isOn); // Add this line
+        SetResolution(PlayerPrefs.GetInt("Resolution", 18));
+
     }
 
-    private void SaveSettings()
+    public void SaveSettings()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
         PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
         PlayerPrefs.SetInt("Resolution", resolutionDropdown.value);
         PlayerPrefs.Save();
+        LoadSettings();
+    }
+
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].width == 1920 && resolutions[i].height == 1080)
+            {
+                PlayerPrefs.SetInt("Resolution", i);
+                break;
+            }
+        }
+        SceneManager.LoadScene(mainMenu);
+        LoadSettings();
     }
 }

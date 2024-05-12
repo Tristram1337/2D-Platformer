@@ -4,11 +4,6 @@ public class SkyLineMover : MonoBehaviour
 {
     public float maxDistance = 22f;
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         float distance = transform.position.x - Camera.main.transform.position.x;

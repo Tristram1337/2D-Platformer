@@ -5,13 +5,8 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public static UIController instance;
-    public static Tutorial tutorial;
-    private void Awake() // Instantiate
-    {
-        instance = this;
-    }
 
+    public static Tutorial tutorial;
     public Image[] heartIcons;
 
     public Sprite heartFull, heartEmpty;
@@ -31,6 +26,13 @@ public class UIController : MonoBehaviour
 
     public string mainMenuScene;
     private readonly string firstLevelScene = "Level 1";
+
+    public static UIController instance;
+
+    private void Awake() // Instantiate
+    {
+        instance = this;
+    }
 
     void Start()
     {

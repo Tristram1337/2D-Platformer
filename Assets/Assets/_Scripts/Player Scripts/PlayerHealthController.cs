@@ -2,12 +2,6 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
-    public static PlayerHealthController instance;
-    private void Awake() // Instantiate
-    {
-        instance = this;
-    }
-
     public int currentHealth, maxHealth;
 
     public float invincibilityLength;
@@ -15,6 +9,12 @@ public class PlayerHealthController : MonoBehaviour
 
     public SpriteRenderer spriteRenderer;
     public Color normalColor, fadeColor;
+
+    public static PlayerHealthController instance;
+    private void Awake() // Instantiate
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -54,8 +54,6 @@ public class PlayerHealthController : MonoBehaviour
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-
-                //gameObject.SetActive(false); // Dont destroy anymore
 
                 // Respawn the player
                 LifeController.instance.Respawn();

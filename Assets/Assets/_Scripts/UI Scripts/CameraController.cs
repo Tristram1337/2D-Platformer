@@ -25,14 +25,14 @@ public class CameraController : MonoBehaviour
         // Size of camera
         halfHeight = theCamera.orthographicSize;
         halfWidth = theCamera.orthographicSize * theCamera.aspect;
-        //Debug.Log("Camera Orthographic Size Height: " + halfHeight);
-        //Debug.Log("Camera Orthographic Size Width: " + halfWidth);
+        //Debug.Log("Camera Orthographic Size Height: " + halfHeight); // Debugging Screen position out of view frustum (screen pos 867.000000, -6.000000, 0.000000) (Camera rect 0 0 1171 447) // idk
+        //Debug.Log("Camera Orthographic Size Width: " + halfWidth); // Debugging Screen position out of view frustum (screen pos 867.000000, -6.000000, 0.000000) (Camera rect 0 0 1171 447) // idk
     }
 
     void LateUpdate()
     {
         // Follow Player
-        float adjustedY = target.position.y + 1; // Adjust the y-coordinate as needed
+        float adjustedY = target.position.y + 1;
         transform.position = new Vector3(target.position.x, adjustedY, transform.position.z);
 
         // Freeze pozition - horizontal or vertical
@@ -45,9 +45,7 @@ public class CameraController : MonoBehaviour
             transform.position = new Vector3(positionStore.x, transform.position.y, transform.position.z);
 
         }
-
-        //Debug.Log("Camera Position Before Clamping: " + transform.position);
-
+        //Debug.Log("Camera Position Before Clamping: " + transform.position); // View frustum bug idk
         // Clamping, "sticking" camera to a chosen place
         if (clampPosition == true)
         {

@@ -3,18 +3,18 @@ using UnityEngine.UI;
 
 public class VictoryFade : MonoBehaviour
 {
-    public static VictoryFade instance;
-    private void Awake()
-    {
-        instance = this;
-    }
-
     public GameObject fadeScreenObject;
     public Image fadeScreen;
     public float fadeSpeed;
 
     public bool fadingToBlack;
     public bool fadingFromBlack;
+
+    public static VictoryFade instance;
+    private void Awake()
+    {
+        instance = this;
+    }
 
     void Start()
     {

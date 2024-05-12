@@ -4,8 +4,6 @@ public class CheckpointManager : MonoBehaviour
 {
     public Checkpoint[] allCheckpoints;
 
-    //private Checkpoint activeCheckpoint;
-
     public Vector3 respawnPosition;
 
     void Start()
@@ -22,17 +20,6 @@ public class CheckpointManager : MonoBehaviour
 
     }
 
-    void Update()
-    {
-
-#if UNITY_EDITOR    // Debug function, deactivating all checkpoints *after compiling, doesnt work anymore
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            DeactivateAllCheckpoints();
-        }
-    }
-#endif
-
     public void DeactivateAllCheckpoints() // Deactivate all checkpoints
     {
         foreach (Checkpoint cp in allCheckpoints)
@@ -44,7 +31,6 @@ public class CheckpointManager : MonoBehaviour
     public void SetActiveCheckpoint(Checkpoint lastActiveCheckpoint) // Last active checkpoint
     {
         DeactivateAllCheckpoints();
-        //activeCheckpoint = lastActiveCheckpoint;
 
         respawnPosition = lastActiveCheckpoint.transform.position;
     }

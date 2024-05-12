@@ -21,9 +21,4 @@ public class TutorialManager : MonoBehaviour
             t.tutorial = this;
         }
     }
-
-    void Update()
-    {
-
-    }
 }

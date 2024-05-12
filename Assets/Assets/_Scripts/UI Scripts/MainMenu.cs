@@ -17,35 +17,11 @@ public class MainMenuScript : MonoBehaviour
 
     void Start()
     {
-        Scene scene = SceneManager.GetActiveScene();
-        string currentScene = scene.name;
-
-        if (currentScene != "Credits")
-        {
-            AudioManager.instance.PlayMenuMusic();
-        }
-
         if (PlayerPrefs.HasKey("currentLevel") && savedGamesButton != null) // as stated in savedGamesButton comment
         {
             savedGamesButton.SetActive(true);
         }
     }
-
-
-#if UNITY_EDITOR
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.M)) // Just for testing
-        {
-            AudioManager.instance.PlayLevelCompleteMusic();
-        }
-
-        if (Input.GetKeyDown(KeyCode.C)) // For testing, delete all data
-        {
-            PlayerPrefs.DeleteAll();
-        }
-    }
-#endif
 
     public void StartGame()
     {
@@ -55,14 +31,14 @@ public class MainMenuScript : MonoBehaviour
         InfoTracker.instance.currentFruit = startingFruit;
 
         InfoTracker.instance.SaveInfo();
-
         SceneManager.LoadScene(firstLevel);
     }
 
     public void SavedGames() // as stated in savedGamesButton comment
     {
-        StopMusic();
         SceneManager.LoadScene(PlayerPrefs.GetString("currentLevel"));
+        AudioManager.instance.StopMusic();
+        AudioManager.instance.victoryMusic.Play();
     }
 
     public void Options()
@@ -70,15 +46,19 @@ public class MainMenuScript : MonoBehaviour
         SceneManager.LoadScene(options);
     }
 
+    public void OptionsSave()
+    {
+        OptionsManager.instance.SaveSettings();
+        SceneManager.LoadScene(mainMenu);
+    }
+
     public void MainMenu()
     {
-        StopMusic();
         SceneManager.LoadScene(mainMenu);
     }
 
     public void Credits()
     {
-        StopMusic();
         SceneManager.LoadScene(credits);
     }
 
@@ -99,5 +79,4 @@ public class MainMenuScript : MonoBehaviour
             Debug.LogError("AudioManager instance is null");
         }
     }
-
 }

@@ -4,17 +4,10 @@ using UnityEngine.SceneManagement;
 public class VictoryScreen : MonoBehaviour
 {
     public string mainMenu;
-
     void Start()
     {
-        // PlayerPrefs.DeleteAll();   // Delete all the saved data
-
-        if (!AudioManager.instance.IsMusicPlaying())
-        {
-            AudioManager.instance.PlayLevelFinalCompleteMusic();
-        }
+        // PlayerPrefs.DeleteAll();   // Delete all the saved data, if I would prefer not to have "continue button" leading to victory scene, idk prolly will keep it
     }
-
     public void MainMenu()
     {
         // Initiate fading to black

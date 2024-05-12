@@ -3,12 +3,6 @@ using UnityEngine;
 [SelectionBase]
 public class PlayerController : MonoBehaviour
 {
-    public static PlayerController instance;
-    private void Awake() // Instantiate
-    {
-        instance = this;
-    }
-
     public Rigidbody2D rigidBody;
 
     private float activeSpeed;
@@ -29,9 +23,10 @@ public class PlayerController : MonoBehaviour
     public float knockbackLength, knockbackSpeed;
     private float knockbackCounter;
 
-    void Start()
+    public static PlayerController instance;
+    private void Awake() // Instantiate
     {
-
+        instance = this;
     }
 
     void Update()
@@ -121,7 +116,6 @@ public class PlayerController : MonoBehaviour
 
     void ChangeSpriteSide() // Switch sprite's sides visually
     {
-
         if (rigidBody.velocity.x > 0)
         {
             transform.localScale = Vector3.one;

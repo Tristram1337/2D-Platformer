@@ -9,12 +9,14 @@ public class AudioManager : MonoBehaviour
     public AudioSource creditsMusic;
     public AudioSource bossMusic;
     public AudioSource levelCompleteMusic;
-    public AudioSource levelFinalCompleteMusic;
+    public AudioSource victoryMusic;
     public AudioSource[] levelTracks;
     public AudioSource[] allSFX;
     public AudioMixer mainMixer;
+    private int currentTrack = 0;
 
     public static AudioManager instance;
+
     public void Awake() // Instantiate
     {
         // Check null eliminates stacking of the audio in game
@@ -38,30 +40,23 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public int GetCurrentTrack()
+    {
+        return currentTrack;
+    }
+
     public void StopMusic() // Takes care of music before playing anything, could cause overlay of music
     {
         creditsMusic.Stop();
         menuMusic.Stop();
         bossMusic.Stop();
-        levelFinalCompleteMusic.Stop();
+        victoryMusic.Stop();
         levelCompleteMusic.Stop();
 
         foreach (AudioSource track in levelTracks)
         {
             track.Stop();
         }
-    }
-
-    public void PlayMenuMusic()
-    {
-        StopMusic();
-        menuMusic.Play();
-    }
-
-    public void PlayCreditsMusic()
-    {
-        StopMusic();
-        creditsMusic.Play();
     }
 
     public void PlayBossMusic()
@@ -75,20 +70,34 @@ public class AudioManager : MonoBehaviour
         Scene currentScene = SceneManager.GetActiveScene();
         string current = currentScene.name;
 
-        //StopMusic();
         levelCompleteMusic.Play();
 
-        if (current != "Level 6")
+        if (current != "Level 6") // Final Level
         {
-            StartCoroutine(FadeOutLevelMusic(3.0f)); // Adjust the delay as needed
+            StartCoroutine(FadeOutLevelMusic(3f));
         }
-
     }
 
     public void PlayLevelMusic(int trackToPlay)
     {
+        currentTrack = GetCurrentTrack();
+
+        // If the requested track is already playing, just return
+        if (currentTrack == trackToPlay && IsMusicPlaying())
+        {
+            return;
+        }
+
+        // Update the current track number, prolly useless, will keep just to be safe
+        currentTrack = trackToPlay;
+
         StopMusic();
         levelTracks[trackToPlay].Play();
+    }
+
+    private IEnumerator FadeOutLevelMusic(float fadeDuration)
+    {
+        yield return StartCoroutine(FadeOutAudio(fadeDuration));
     }
 
     public void PlayLevelFinalCompleteMusic()
@@ -97,17 +106,27 @@ public class AudioManager : MonoBehaviour
         if (IsMusicPlaying())
         {
             // Start fading out the current level music
-            StartCoroutine(FadeOutAndPlayFinalCompleteMusic(0f)); // Adjust the delay as needed
+            StartCoroutine(FadeOutAndPlayFinalCompleteMusic(0f));
         }
         else
         {
             // If no music is playing, play the final complete music immediately
-            levelFinalCompleteMusic.Play();
+            victoryMusic.Play();
         }
     }
 
-    public void PlaySFX(int sfxToPlay) // Turns off music before it plays another
+    private IEnumerator FadeOutAndPlayFinalCompleteMusic(float delay)
     {
+        // Start fading out the current level music
+        yield return StartCoroutine(FadeOutLevelMusic(delay));
+
+        // After the current music has faded out, play the final complete music
+        victoryMusic.Play();
+    }
+
+    public void PlaySFX(int sfxToPlay)
+    {
+        // Turns off sfx before it plays another
         allSFX[sfxToPlay].Stop();
         allSFX[sfxToPlay].Play();
     }
@@ -122,10 +141,9 @@ public class AudioManager : MonoBehaviour
         allSFX[sfxToPlay].Play();
     }
 
-    public bool IsMusicPlaying()
+    public bool IsMusicPlaying() // Check if any of the music sources are playing
     {
-        // Check if any of the music sources are playing
-        if (menuMusic.isPlaying || bossMusic.isPlaying || levelCompleteMusic.isPlaying || levelFinalCompleteMusic.isPlaying || creditsMusic.isPlaying)
+        if (menuMusic.isPlaying || bossMusic.isPlaying || levelCompleteMusic.isPlaying || victoryMusic.isPlaying || creditsMusic.isPlaying)
         {
             return true;
         }
@@ -139,23 +157,6 @@ public class AudioManager : MonoBehaviour
         }
 
         return false;
-    }
-
-    private IEnumerator FadeOutLevelMusic(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        // Start fading out the current level music
-        StartCoroutine(FadeOutAudio(2.0f)); // Adjust the fade duration as needed
-    }
-
-    private IEnumerator FadeOutAndPlayFinalCompleteMusic(float delay)
-    {
-        // Start fading out the current level music
-        yield return StartCoroutine(FadeOutLevelMusic(delay));
-
-        // After the current music has faded out, play the final complete music
-        levelFinalCompleteMusic.Play();
     }
 
     private IEnumerator FadeOutAudio(float fadeDuration)
@@ -172,7 +173,7 @@ public class AudioManager : MonoBehaviour
 
         if (currentLevelTrack == null)
         {
-            yield break; // No currently playing track found, exit coroutine
+            yield break; 
         }
 
         float startVolume = currentLevelTrack.volume;
@@ -189,14 +190,7 @@ public class AudioManager : MonoBehaviour
 
         // Stop the audio source
         currentLevelTrack.Stop();
-    }
 
-    public void SetVolume(float volume)
-    {
-        // Convert the linear volume range (0 to 1) to a logarithmic decibel scale
-        float dB = Mathf.Log10(volume / 100) * 20;
-
-        // Set the volume of the AudioMixer
-        mainMixer.SetFloat("Volume", dB);
+        currentLevelTrack.volume = startVolume;
     }
 }

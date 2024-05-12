@@ -250,7 +250,7 @@ public class BossBattleController : MonoBehaviour
             Instantiate(deathEffect, theBoss.position, Quaternion.identity);
 
             AudioManager.instance.PlaySFX(16);
-
+            AudioManager.instance.StopMusic();
             AudioManager.instance.PlayLevelMusic(FindFirstObjectByType<LevelMusicPlayer>().trackToPlay);
         }
     }

@@ -4,11 +4,6 @@ using UnityEngine.SceneManagement;
 
 public class LifeController : MonoBehaviour
 {
-    public static LifeController instance; // Static instance
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private PlayerController thePlayer;
 
@@ -19,6 +14,12 @@ public class LifeController : MonoBehaviour
     public GameObject deathEffect, respawnEffect;
 
     private Scene scene;
+
+    public static LifeController instance;
+    private void Awake() // Instantiate
+    {
+        instance = this;
+    }
 
     void Start()
     {
@@ -32,19 +33,14 @@ public class LifeController : MonoBehaviour
         scene = SceneManager.GetActiveScene();
     }
 
-    void Update()
-    {
-
-    }
-
     public void Respawn() // Respawn with full health
     {
         thePlayer.gameObject.SetActive(false);
+
         // Set speed of player after respawn
         thePlayer.rigidBody.velocity = Vector2.zero;
 
         currentLives--;
-
 
         // If enough lives, continue respawning
         if (currentLives <= 0)
@@ -69,7 +65,6 @@ public class LifeController : MonoBehaviour
         Instantiate(deathEffect, thePlayer.transform.position, deathEffect.transform.rotation);
 
         AudioManager.instance.PlaySFX(11);
-
     }
 
     public IEnumerator RespawnCo() // Respawn coroutine, delaying respawn

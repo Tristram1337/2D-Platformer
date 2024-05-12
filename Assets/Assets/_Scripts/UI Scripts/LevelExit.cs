@@ -31,7 +31,7 @@ public class LevelExit : MonoBehaviour
 
                 if (nextLevel == "Victory Scene")
                 {
-                    AudioManager.instance.PlayLevelFinalCompleteMusic();
+                    AudioManager.instance.PlayLevelFinalCompleteMusic(); // So it starts immediately, not in next scene
                 }
                 else
                 {
