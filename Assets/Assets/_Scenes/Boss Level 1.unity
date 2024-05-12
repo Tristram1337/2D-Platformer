@@ -962,7 +962,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 1.5785141, y: 13.358466}
+  m_Offset: {x: 1.5785141, y: 10.992371}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -972,7 +972,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 4.157028, y: 21.009398}
+  m_Size: {x: 4.157028, y: 25.741589}
   m_EdgeRadius: 0
 --- !u!1 &358853670
 GameObject:
@@ -11508,6 +11508,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4193170673812067090, guid: 0b46c219f7b596448a85ab73480e417e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7446742756687703306, guid: 0b46c219f7b596448a85ab73480e417e, type: 3}
       propertyPath: m_Name
       value: Level End
@@ -12239,6 +12243,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1357190480686358765, guid: 0fa8ae6822f8ba64d8b228bad26b0d3f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357190480686358765, guid: 0fa8ae6822f8ba64d8b228bad26b0d3f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357190480686358765, guid: 0fa8ae6822f8ba64d8b228bad26b0d3f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1412120384186190546, guid: 0fa8ae6822f8ba64d8b228bad26b0d3f, type: 3}
       propertyPath: m_SortingLayer
       value: 0
@@ -12263,6 +12279,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2852589043352141892, guid: 0fa8ae6822f8ba64d8b228bad26b0d3f, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 2956080545551162225, guid: 0fa8ae6822f8ba64d8b228bad26b0d3f, type: 3}
       propertyPath: m_Layer
       value: 7

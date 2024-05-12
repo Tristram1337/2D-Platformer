@@ -66,6 +66,7 @@ public class BossBattleController : MonoBehaviour
                     Vector3.one,
                     bossGrowSpeed * Time.deltaTime);
             }
+
             // Grow projectile size to full size
             if (projectileLauncher.transform.localScale != Vector3.one)
             {
@@ -78,7 +79,6 @@ public class BossBattleController : MonoBehaviour
             launcherRotation += launcherRotateSpeed * Time.deltaTime;
 
             // Resets rotation of projectiles after reaching 360f
-
             if (launcherRotation > 360f)
             {
                 launcherRotation -= 360f;
