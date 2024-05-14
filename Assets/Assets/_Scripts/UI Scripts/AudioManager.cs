@@ -173,7 +173,7 @@ public class AudioManager : MonoBehaviour
 
         if (currentLevelTrack == null)
         {
-            yield break; 
+            yield break;
         }
 
         float startVolume = currentLevelTrack.volume;
