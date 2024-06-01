@@ -13,8 +13,8 @@ public class OptionsManager : MonoBehaviour
     public Toggle fullscreenToggle;
     public TMP_Dropdown resolutionDropdown;
     public Button applyButton;
-    bool isFullscreen;
     Resolution[] resolutions;
+    List<Resolution> uniqueResolutions;
 
     private readonly string mainMenu = "Main Menu";
 
@@ -33,17 +33,24 @@ public class OptionsManager : MonoBehaviour
         resolutionDropdown.ClearOptions();
 
         List<string> options = new();
+        uniqueResolutions = new List<Resolution>();
 
         int defaultResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
-            options.Add(option);
 
-            // If the resolution is 1920x1080, set it as the default resolution
-            if (resolutions[i].width == 1920 && resolutions[i].height == 1080)
+            // Only add the resolution if it's not already in the list
+            if (!options.Contains(option))
             {
-                defaultResolutionIndex = i;
+                options.Add(option);
+                uniqueResolutions.Add(resolutions[i]); 
+
+                // If the resolution is 1920x1080, set it as the default resolution
+                if (resolutions[i].width == 1920 && resolutions[i].height == 1080)
+                {
+                    defaultResolutionIndex = i;
+                }
             }
         }
 
@@ -55,6 +62,7 @@ public class OptionsManager : MonoBehaviour
         sfxVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
         volumeSlider.onValueChanged.AddListener(SetVolume);
         resolutionDropdown.onValueChanged.AddListener(SetResolution);
+        fullscreenToggle.onValueChanged.AddListener(SetFullscreen);
         applyButton.onClick.AddListener(SaveSettings);
 
         LoadSettings();
@@ -86,10 +94,10 @@ public class OptionsManager : MonoBehaviour
 
     public void SetResolution(int resolutionIndex)
     {
-        if (resolutionIndex >= 0 && resolutionIndex < resolutions.Length)
+        if (resolutionIndex >= 0 && resolutionIndex < uniqueResolutions.Count)
         {
-            Resolution resolution = resolutions[resolutionIndex];
-            Screen.SetResolution(resolution.width, resolution.height, isFullscreen); // Modify this line
+            Resolution resolution = uniqueResolutions[resolutionIndex]; // Trying uniqueResolutions instead of resolutions
+            Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
         }
         else
         {
@@ -99,7 +107,7 @@ public class OptionsManager : MonoBehaviour
 
     public void SetFullscreen(bool isFullscreen)
     {
-        this.isFullscreen = isFullscreen;
+        Screen.fullScreen = isFullscreen;
     }
 
     public void LoadSettings()
@@ -107,9 +115,8 @@ public class OptionsManager : MonoBehaviour
         volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1f);
         sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
         fullscreenToggle.isOn = PlayerPrefs.GetInt("Fullscreen", 1) == 1;
-        SetFullscreen(fullscreenToggle.isOn); // Add this line
-        SetResolution(PlayerPrefs.GetInt("Resolution", 18));
-
+        SetFullscreen(fullscreenToggle.isOn);
+        resolutionDropdown.value = PlayerPrefs.GetInt("Resolution", resolutionDropdown.value); // Load the dropdown value instead of the resolution index
     }
 
     public void SaveSettings()
@@ -117,10 +124,11 @@ public class OptionsManager : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
         PlayerPrefs.SetFloat("SFXVolume", sfxVolumeSlider.value);
         PlayerPrefs.SetInt("Fullscreen", fullscreenToggle.isOn ? 1 : 0);
-        PlayerPrefs.SetInt("Resolution", resolutionDropdown.value);
+        PlayerPrefs.SetInt("Resolution", resolutionDropdown.value); // Save the dropdown value instead of the resolution index
         PlayerPrefs.Save();
         LoadSettings();
     }
+
 
     public void DeleteData()
     {
